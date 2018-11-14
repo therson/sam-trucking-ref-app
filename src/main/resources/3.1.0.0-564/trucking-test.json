@@ -11,7 +11,7 @@
       "description": "",
       "config": {
         "properties": {
-          "cluster": "1",
+          "CLUSTER": "%CLUSTERID%",
           "consumerGroupId": "truckingdemo1",
           "retryDelayPeriodMs": 2,
           "maximumUncommittedOffsets": 10000000,
@@ -128,7 +128,7 @@
       "description": "",
       "config": {
         "properties": {
-          "cluster": "1",
+          "CLUSTER": "%CLUSTERID%",
           "consumerGroupId": "truckingdemo2",
           "retryDelayPeriodMs": 2,
           "maximumUncommittedOffsets": 10000000,
@@ -227,7 +227,7 @@
       "description": "",
       "config": {
         "properties": {
-          "cluster": "1",
+          "CLUSTER": "%CLUSTERID%",
           "clusterReplication": 1,
           "segmentGranularity": "FIFTEEN_MINUTE",
           "indexRetryPeriod": "PT10M",
@@ -268,7 +268,7 @@
       "description": "",
       "config": {
         "properties": {
-          "cluster": "1",
+          "CLUSTER": "%CLUSTERID%",
           "clusterReplication": 1,
           "segmentGranularity": "FIFTEEN_MINUTE",
           "indexRetryPeriod": "PT10M",
@@ -333,7 +333,7 @@
             "route",
             "speed"
           ],
-          "cluster": "1",
+          "CLUSTER": "%CLUSTERID%",
           "path": "/apps/trucking-app",
           "extension": ".txt",
           "rotationPolicy": {
@@ -361,7 +361,7 @@
       "config": {
         "properties": {
           "writeToWAL": true,
-          "cluster": "1",
+          "CLUSTER": "%CLUSTERID%",
           "columnFamily": "events",
           "parallelism": 1,
           "batchSize": 100,
