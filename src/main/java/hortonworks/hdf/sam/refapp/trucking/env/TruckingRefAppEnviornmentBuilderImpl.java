@@ -634,10 +634,15 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		mappings.add(new ServiceEnvironmentMapping(hdfServicePoolName, "ZOOKEEPER"));
 		mappings.add(new ServiceEnvironmentMapping(hdfServicePoolName, "AMBARI_INFRA"));
 		mappings.add(new ServiceEnvironmentMapping(hdfServicePoolName, "AMBARI_METRICS"));
-		
-		mappings.add(new ServiceEnvironmentMapping(hdpServicePoolName, "DRUID"));
+		if (singleHDP) {
+		mappings.add(new ServiceEnvironmentMapping(hdfervicePoolName, "DRUID"));
+		mappings.add(new ServiceEnvironmentMapping(hdfServicePoolName, "HBASE"));
+		mappings.add(new ServiceEnvironmentMapping(hdfServicePoolName, "HDFS"));	
+		}	else {
+		mappings.add(new ServiceEnvironmentMapping(hdpervicePoolName, "DRUID"));
 		mappings.add(new ServiceEnvironmentMapping(hdpServicePoolName, "HBASE"));
-		mappings.add(new ServiceEnvironmentMapping(hdpServicePoolName, "HDFS"));		
+		mappings.add(new ServiceEnvironmentMapping(hdpServicePoolName, "HDFS"));	
+		}
 		return mappings;
 	}	
 	
