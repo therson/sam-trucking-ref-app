@@ -42,7 +42,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	
 	protected final Logger LOG = LoggerFactory.getLogger(TruckingRefAppEnviornmentBuilderImpl.class);
 	private static final int KILL_TIMEOUT_SECONDS = 50;
-	private static final int DEPLOY_TIMEOUT_SECONDS = 50;
+	private static final int DEPLOY_TIMEOUT_SECONDS = 300;
 	
 	
 	/* Constructor Args Required for teh Builder */
