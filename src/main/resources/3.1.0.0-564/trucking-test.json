@@ -317,7 +317,7 @@
       "description": "",
       "config": {
         "properties": {
-          "fsUrl": "hdfs://%HDFSURL:8020",
+          "fsUrl": "hdfs://%HDFSURL%:8020",
           "outputFields": [
             "eventType",
             "latitude",
