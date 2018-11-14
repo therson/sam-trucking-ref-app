@@ -195,11 +195,11 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		LOG.info("Trucking Ref App Environment creation started[" + startTime.toString() + "]");
 		
 		createSchemasInSchemaRegistry();
-		/**uploadAllCustomUDFsForRefApp();*/
+		uploadAllCustomUDFsForRefApp();
 		uploadAllCustomSources();
 		uploadAllCustomSinks();
 		uploadAllModels();
-		uploadAllCustomProcessorsForRefApp();
+		/**uploadAllCustomProcessorsForRefApp();*/
 		createServicePools();
 		createEnvironments();
 		importRefApps();
