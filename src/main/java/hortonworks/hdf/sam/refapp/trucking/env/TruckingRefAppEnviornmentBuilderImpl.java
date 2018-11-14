@@ -80,6 +80,8 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	private String hdpServicePoolName;
 	private String samEnvName;
 	private String samAppName;
+	private String username;
+	private String password;
 	private boolean deployRefApps;
 	
 	
