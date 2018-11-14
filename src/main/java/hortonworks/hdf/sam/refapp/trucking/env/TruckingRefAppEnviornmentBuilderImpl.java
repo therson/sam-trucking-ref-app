@@ -101,7 +101,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		TruckingRefAppEnviornmentBuilder envBuilder = new TruckingRefAppEnviornmentBuilderImpl(envPropResource);
 		String arg_2 = new String(args[1]).trim().toLowerCase();
 		System.out.println(arg_2);
-		if (arg_2 == "build") {
+		if (arg_2.equals("build")) {
 			envBuilder.buildEnvironment();
 		} else {
 			envBuilder.tearDownEnvironment();
