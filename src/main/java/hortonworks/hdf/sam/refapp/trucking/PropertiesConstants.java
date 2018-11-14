@@ -11,7 +11,7 @@ public class PropertiesConstants {
 	/* Properties added by me */
 	public static final String AMBARI_USERNAME = "sam.service.pool.hdp.ambari.username";
 	public static final String AMBARI_PASSWORD = "sam.service.pool.hdp.ambari.passwd";
-	public static final String SINGLE_HDP = "sam.use.single.hdp.hdf"
+	public static final String SINGLE_HDP = "sam.use.single.hdp.hdf";
 	
 	/* Properties specific to Env Builder App */
 	public static final String SAM_EXTENSIONS_HOME = "sam.extensions.home";
