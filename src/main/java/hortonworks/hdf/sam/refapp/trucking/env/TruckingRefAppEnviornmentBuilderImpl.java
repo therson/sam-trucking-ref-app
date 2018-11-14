@@ -123,6 +123,8 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 			 envProperties.getProperty(PropertiesConstants.SAM_SERVICE_POOL_HDP_NAME),
 			 envProperties.getProperty(PropertiesConstants.SAM_ENV_NAME),
 			 envProperties.getProperty(PropertiesConstants.SAM_APP_NAME),
+			 envProperties.getProperty(PropertiesConstants.AMBARI_USERNAME),
+			 envProperties.getProperty(PropertiesConstants.AMBARI_PASSWORD),
 			 Boolean.valueOf(envProperties.getProperty(PropertiesConstants.SAM_DEPLOY_REF_APPS)));
 					 
 	}
@@ -131,12 +133,12 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 												String extensionsArtifactSuffix, boolean registerCustomSorucesSinksConfig,
 											    String hdfAmbariClusterEndpointUrl, String hdpAmbariClusterEndpointUrl, String schemaRegistryUrl,
 											    String hdfPoolName, String hdpPoolName,
-												String envName, String appName, boolean deployRefAppsConfig) {
+												String envName, String appName, String username, String password, boolean deployRefAppsConfig) {
 		
 
 		init(samRestURL, extensionHomeDirectory, extensionsArtifactSuffix, registerCustomSorucesSinksConfig,
 				hdfAmbariClusterEndpointUrl, hdpAmbariClusterEndpointUrl,
-				schemaRegistryUrl, hdfPoolName, hdpPoolName, envName, appName, deployRefAppsConfig);
+				schemaRegistryUrl, hdfPoolName, hdpPoolName, envName, appName, username, password, deployRefAppsConfig);
 		
 	}
 
@@ -145,7 +147,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 			String hdfAmbariClusterEndpointUrl,
 			String hdpAmbariClusterEndpointUrl, String schemaRegistryUrl,
 			String hdfPoolName, String hdpPoolName,
-			String envName, String appName, boolean deployRefAppsConfig) {
+			String envName, String appName, String username, String password, boolean deployRefAppsConfig) {
 		this.samRESTUrl = samRestURL;
 		this.udfSDK = new SAMUDFSDKUtils(samRESTUrl);
 		this.samAppSDK = new SAMAppSDKUtils(samRestURL);
@@ -168,6 +170,8 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		this.hdpServicePoolName = hdpPoolName;
 		this.samEnvName = envName;
 		this.samAppName = appName;
+		this.username = username;
+		this.password = password;
 		this.deployRefApps = deployRefAppsConfig;
 		
 		if(StringUtils.isNotEmpty(extensionsArtifactSuffix)) {
@@ -189,7 +193,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		LOG.info("Trucking Ref App Environment creation started[" + startTime.toString() + "]");
 		
 		createSchemasInSchemaRegistry();
-		uploadAllCustomUDFsForRefApp();
+		/**uploadAllCustomUDFsForRefApp();*/
 		uploadAllCustomSources();
 		uploadAllCustomSinks();
 		uploadAllModels();
@@ -333,10 +337,10 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		DateTime start = new DateTime();
 		LOG.info("Starting to create All Service Pools");
 		
-		samServicePoolManager.createServicePool(hdfServicePoolName, hdfAmbariClusterEndpointUrl, "admin", "admin");
+		samServicePoolManager.createServicePool(hdfServicePoolName, hdfAmbariClusterEndpointUrl, username, password);
 		LOG.info("Service Pool["+ hdfServicePoolName +"] created with Ambari Endpoint[" + hdfAmbariClusterEndpointUrl +"]");
 
-		samServicePoolManager.createServicePool(hdpServicePoolName, hdpAmbariClusterEndpointUrl, "admin", "admin");
+		samServicePoolManager.createServicePool(hdpServicePoolName, hdpAmbariClusterEndpointUrl, username, password);
 		LOG.info("Service Pool["+ hdpServicePoolName +"] created with Ambari Endpoint[" + hdpAmbariClusterEndpointUrl +"]");
 
 		
@@ -707,7 +711,20 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		if(StringUtils.isEmpty(samAppName)) {
 			String errMsg = "Property["+PropertiesConstants.SAM_APP_NAME +"] is required";
 			throw new RuntimeException(errMsg);
-		}			
+		}
+
+		String username = envProperties.getProperty(PropertiesConstants.AMBARI_USERNAME);
+		if(StringUtils.isEmpty(username)) {
+			String errMsg = "Property["+PropertiesConstants.AMBARI_USERNAME +"] is required";
+			throw new RuntimeException(errMsg);
+		}
+
+		String password = envProperties.getProperty(PropertiesConstants.AMBARI_PASSWORD);
+		if(StringUtils.isEmpty(password)) {
+			String errMsg = "Property["+PropertiesConstants.AMBARI_PASSWORD +"] is required";
+			throw new RuntimeException(errMsg);
+		}
+
 		return envProperties;
 		
 	}		
