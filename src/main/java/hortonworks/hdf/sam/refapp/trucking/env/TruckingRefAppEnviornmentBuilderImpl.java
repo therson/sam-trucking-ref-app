@@ -83,6 +83,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	private String username;
 	private String password;
 	private boolean deployRefApps;
+	private boolean singleHDP;
 	
 	
 	
@@ -127,6 +128,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 			 envProperties.getProperty(PropertiesConstants.SAM_APP_NAME),
 			 envProperties.getProperty(PropertiesConstants.AMBARI_USERNAME),
 			 envProperties.getProperty(PropertiesConstants.AMBARI_PASSWORD),
+			 Boolean.valueOf(envProperties.getProperty(PropertiesConstants.SINGLE_HDP)),
 			 Boolean.valueOf(envProperties.getProperty(PropertiesConstants.SAM_DEPLOY_REF_APPS)));
 					 
 	}
@@ -135,12 +137,12 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 												String extensionsArtifactSuffix, boolean registerCustomSorucesSinksConfig,
 											    String hdfAmbariClusterEndpointUrl, String hdpAmbariClusterEndpointUrl, String schemaRegistryUrl,
 											    String hdfPoolName, String hdpPoolName,
-												String envName, String appName, String username, String password, boolean deployRefAppsConfig) {
+												String envName, String appName, String username, String password, boolean singleHDP, boolean deployRefAppsConfig) {
 		
 
 		init(samRestURL, extensionHomeDirectory, extensionsArtifactSuffix, registerCustomSorucesSinksConfig,
 				hdfAmbariClusterEndpointUrl, hdpAmbariClusterEndpointUrl,
-				schemaRegistryUrl, hdfPoolName, hdpPoolName, envName, appName, username, password, deployRefAppsConfig);
+				schemaRegistryUrl, hdfPoolName, hdpPoolName, envName, appName, username, password, singleHDP, deployRefAppsConfig);
 		
 	}
 
@@ -149,7 +151,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 			String hdfAmbariClusterEndpointUrl,
 			String hdpAmbariClusterEndpointUrl, String schemaRegistryUrl,
 			String hdfPoolName, String hdpPoolName,
-			String envName, String appName, String username, String password, boolean deployRefAppsConfig) {
+			String envName, String appName, String username, String password, boolean singleHDP, boolean deployRefAppsConfig) {
 		this.samRESTUrl = samRestURL;
 		this.udfSDK = new SAMUDFSDKUtils(samRESTUrl);
 		this.samAppSDK = new SAMAppSDKUtils(samRestURL);
@@ -174,6 +176,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		this.samAppName = appName;
 		this.username = username;
 		this.password = password;
+		this.singleHDP = singleHDP;
 		this.deployRefApps = deployRefAppsConfig;
 		
 		if(StringUtils.isNotEmpty(extensionsArtifactSuffix)) {
@@ -341,10 +344,10 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		
 		samServicePoolManager.createServicePool(hdfServicePoolName, hdfAmbariClusterEndpointUrl, username, password);
 		LOG.info("Service Pool["+ hdfServicePoolName +"] created with Ambari Endpoint[" + hdfAmbariClusterEndpointUrl +"]");
-
+		if (!singleHDP) {
 		samServicePoolManager.createServicePool(hdpServicePoolName, hdpAmbariClusterEndpointUrl, username, password);
 		LOG.info("Service Pool["+ hdpServicePoolName +"] created with Ambari Endpoint[" + hdpAmbariClusterEndpointUrl +"]");
-
+		}
 		
 		DateTime end = new DateTime();
 		Seconds creationTime = Seconds.secondsBetween(start, end);

@@ -8,8 +8,10 @@ public class PropertiesConstants {
 	public static final String SAM_APP_DEPLOY_TIMEOUT = "sam.app.deploy.timeout.seconds";
 	public static final String SAM_SERVICE_POOL_HDF_AMBARI_URL = "sam.service.pool.hdf.ambari.url";
 	public static final String SAM_SERVICE_POOL_HDP_AMBARI_URL = "sam.service.pool.hdp.ambari.url";
+	/* Properties added by me */
 	public static final String AMBARI_USERNAME = "sam.service.pool.hdp.ambari.username";
 	public static final String AMBARI_PASSWORD = "sam.service.pool.hdp.ambari.passwd";
+	public static final String SINGLE_HDP = "sam.use.single.hdp.hdf"
 	
 	/* Properties specific to Env Builder App */
 	public static final String SAM_EXTENSIONS_HOME = "sam.extensions.home";
