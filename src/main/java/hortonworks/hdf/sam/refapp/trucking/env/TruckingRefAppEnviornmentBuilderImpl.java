@@ -199,11 +199,11 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		uploadAllCustomSources();
 		uploadAllCustomSinks();
 		uploadAllModels();
-		/**uploadAllCustomProcessorsForRefApp();*/
+		/**uploadAllCustomProcessorsForRefApp();*/	
 		createServicePools();
 		createEnvironments();
 		importRefApps();
-		createTestCases();
+		/*createTestCases();**/
 		deployRefApps();
 		
 		DateTime endTime = new DateTime();
