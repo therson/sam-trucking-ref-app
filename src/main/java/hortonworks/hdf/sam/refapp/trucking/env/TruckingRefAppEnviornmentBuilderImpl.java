@@ -86,14 +86,20 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	
 	public static void main(String args[]) {
 		
-		if(args == null || args.length != 1) {
-			String errMsg = "One arg with location of properties file for environment creation needs to be passed to app";
+		if(args == null || args.length != 2) {
+			String errMsg = "Two args need to be passed: 1 resource file path and a build/delete string";
 			throw new RuntimeException(errMsg);
 		}
 		String propFileLocation = args[0];
 		Resource envPropResource = new FileSystemResource(propFileLocation);
 		TruckingRefAppEnviornmentBuilder envBuilder = new TruckingRefAppEnviornmentBuilderImpl(envPropResource);
-		envBuilder.buildEnvironment();
+		String arg_2 = new String(args[1]).toLowerCase();
+		if(arg_2 == 'build') {
+			envBuilder.buildEnvironment();
+		} else {
+			envBuilder.tearDownEnvironment();
+		}
+		
 		
 	}
 	
