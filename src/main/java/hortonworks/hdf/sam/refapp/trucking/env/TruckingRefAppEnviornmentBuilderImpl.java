@@ -89,8 +89,8 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	
 	public static void main(String args[]) {
 		
-		if(args == null || args.length != 3) {
-			String errMsg = "Three args need to be passed: 1 resource file path, a build/delete string, and secure / non-secure";
+		if(args == null || args.length != 2) {
+			String errMsg = "Three args need to be passed: 1 resource file path, a build/delete string";
 			throw new RuntimeException(errMsg);
 		}
 
@@ -104,7 +104,6 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		TruckingRefAppEnviornmentBuilder envBuilder = new TruckingRefAppEnviornmentBuilderImpl(envPropResource);
 		String arg_2 = new String(args[1]).trim().toLowerCase();
 		System.out.println(arg_2);
-		String arg_3 = new String(args[2]).trim().toLowerCase();
 		if (arg_2.equals("build")) {
 			envBuilder.buildEnvironment();
 		} else {
