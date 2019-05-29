@@ -313,7 +313,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	}	
 	
 	public void importTruckingRefAppAdvanced() {
-		Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SIMPLE_FILE_LOCATION);
+		Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SECURE_FILE_LOCATION);
 		samAppManager.importSAMApplication(this.samAppName, samEnvName, samImportResource);
 	}
 	
