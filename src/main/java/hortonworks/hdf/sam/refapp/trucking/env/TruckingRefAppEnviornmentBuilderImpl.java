@@ -89,8 +89,8 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	
 	public static void main(String args[]) {
 		
-		if(args == null || args.length != 2) {
-			String errMsg = "Two args need to be passed: 1 resource file path and a build/delete string";
+		if(args == null || args.length != 3) {
+			String errMsg = "Three args need to be passed: 1 resource file path, a build/delete string, and secure / non-secure";
 			throw new RuntimeException(errMsg);
 		}
 
@@ -104,6 +104,7 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		TruckingRefAppEnviornmentBuilder envBuilder = new TruckingRefAppEnviornmentBuilderImpl(envPropResource);
 		String arg_2 = new String(args[1]).trim().toLowerCase();
 		System.out.println(arg_2);
+		String arg_3 = new String(args[2]).trim().toLowerCase();
 		if (arg_2.equals("build")) {
 			envBuilder.buildEnvironment();
 		} else {
@@ -313,7 +314,13 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 	}	
 	
 	public void importTruckingRefAppAdvanced() {
-		Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SECURE_FILE_LOCATION);
+		if (arg_3.equals("secure")) {
+			Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SECURE_FILE_LOCATION);
+
+		} else {
+			Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SIMPLE_FILE_LOCATION);
+
+		}
 		samAppManager.importSAMApplication(this.samAppName, samEnvName, samImportResource);
 	}
 	
