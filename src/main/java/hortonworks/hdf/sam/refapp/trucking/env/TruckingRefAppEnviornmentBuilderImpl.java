@@ -313,15 +313,8 @@ public class TruckingRefAppEnviornmentBuilderImpl implements TruckingRefAppEnvio
 		samAppManager.killSAMApplication(this.samAppName, KILL_TIMEOUT_SECONDS);
 	}	
 	
-	public void importTruckingRefAppAdvanced(String args[]) {
-		String arg_3 = new String(args[2]).trim().toLowerCase();
-		if (arg_3.equals("secure")) {
-			Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SECURE_FILE_LOCATION);
-
-		} else {
-			Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SIMPLE_FILE_LOCATION);
-
-		}
+	public void importTruckingRefAppAdvanced() {
+		Resource samImportResource = new ClassPathResource(PropertiesConstants.SAM_REF_APP_SECURE_FILE_LOCATION);
 		samAppManager.importSAMApplication(this.samAppName, samEnvName, samImportResource);
 	}
 	
